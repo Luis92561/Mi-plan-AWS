@@ -20,7 +20,7 @@ Tus datos **nunca salen del navegador** de cada dispositivo.
 ## 1. Windows
 
 1. Instala **Node.js 20+** (una sola vez): <https://nodejs.org>.
-2. Doble clic en `start-windows.cmd`. La primera vez instala dependencias y compila
+2. Doble clic en el acceso directo **«Mi Plan AWS»** del escritorio (o en `start-windows.cmd`). La primera vez instala dependencias y compila
    (2–3 minutos); después arranca en segundos.
 3. Se abre `http://localhost:7420`. En Chrome o Edge, icono de instalar en la barra de
    direcciones → **«Instalar Mi Plan AWS»**. Queda como una app con su icono, y funciona
@@ -72,8 +72,8 @@ alternativa, nunca falla en silencio.
 ## 4. Android: APK propio (Huawei Mate 10 Pro)
 
 La app también se empaqueta como **APK instalable**, sin cuentas ni tiendas. El archivo
-está en [`deliverables/miplan-aws-1.2.0.apk`](../deliverables/miplan-aws-1.2.0.apk)
-(4 MB, firmado con un keystore propio).
+está en [`deliverables/miplan-aws-1.2.1.apk`](../deliverables/miplan-aws-1.2.1.apk)
+(4 MB, firmado con un keystore propio, versión 1.2.1).
 
 **Instalarlo en el Huawei**
 

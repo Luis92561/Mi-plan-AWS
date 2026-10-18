@@ -3,6 +3,24 @@
 Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
 Versionado [SemVer](https://semver.org/lang/es/).
 
+## [1.2.1] — 2026-10-18
+
+Acceso directo en Windows y launcher más cómodo.
+
+### Añadido
+
+- **Acceso directo «Mi Plan AWS» en el escritorio** con icono propio (`.ico` multi-tamaño),
+  ventana minimizada y directorio de trabajo ya configurado.
+- Icono de marca en `assets/brand/miplan.ico` (16–256 px) generado desde el icono de la app.
+
+### Cambiado
+
+- `start-windows.cmd`: si la app ya está sirviéndose en el puerto 7420, **solo abre el
+  navegador** en lugar de fallar por puerto ocupado.
+- `scripts/serve.mjs`: un segundo arranque tampoco da error; informa y abre la app.
+- La versión del APK se escribe en `android/version.properties` desde `package.json`, así
+  que `npm run apk` ya no necesita tocar el `build.gradle` a mano (APK 1.2.1, code 10201).
+
 ## [1.2.0] — 2026-10-18
 
 **APK propio para Android (Huawei Mate 10 Pro)**, sin cuentas, sin tiendas y sin coste.

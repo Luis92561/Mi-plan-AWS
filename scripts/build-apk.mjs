@@ -13,7 +13,7 @@
  * El resultado se copia a `deliverables/` con la versión de package.json.
  */
 import { execFileSync, spawnSync } from 'node:child_process';
-import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -113,6 +113,16 @@ function run(command, args, cwd) {
 
 console.log(`JDK ${jdk.major} en ${jdk.home}`);
 console.log(`Android SDK en ${sdk}`);
+
+// La versión del APK sale de package.json (una sola fuente de verdad).
+const [major, minor, patch] = pkg.version.split('.').map((part) => Number(part));
+const versionCode = major * 10000 + minor * 100 + patch;
+writeFileSync(
+  join(root, 'android', 'version.properties'),
+  `versionName=${pkg.version}\nversionCode=${versionCode}\n`,
+  'utf8',
+);
+console.log(`Versión del APK: ${pkg.version} (code ${versionCode})`);
 
 run('npm', ['run', 'build'], root);
 run('npx', ['cap', 'sync', 'android'], root);

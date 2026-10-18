@@ -4,6 +4,13 @@ setlocal
 cd /d "%~dp0"
 title Mi Plan AWS
 
+REM Si la app ya está sirviéndose, solo abre el navegador y no arranca otra instancia.
+netstat -an | findstr /R /C:":7420 .*LISTENING" >nul 2>nul
+if not errorlevel 1 (
+  start "" "http://localhost:7420"
+  exit /b 0
+)
+
 where node >nul 2>nul
 if errorlevel 1 (
   echo.
@@ -27,7 +34,7 @@ if not exist "dist\index.html" (
 
 echo.
 echo   Abriendo Mi Plan AWS en el navegador.
-echo   Deja esta ventana abierta mientras la uses.
+echo   Deja esta ventana abierta mientras la uses (es el servidor local).
 echo.
 node scripts\serve.mjs --open
 pause

@@ -1,7 +1,7 @@
 {
   "name": "mi-plan-aws",
   "private": true,
-  "version": "1.2.0",
+  "version": "1.2.1",
   "type": "module",
   "description": "Mi Plan AWS — panel local-first para trackear la ruta de certificaciones AWS",
   "scripts": {

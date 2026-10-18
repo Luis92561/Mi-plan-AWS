@@ -142,9 +142,22 @@ server.listen(port, host, () => {
 
 server.on('error', (error) => {
   if (error.code === 'EADDRINUSE') {
-    console.error(`El puerto ${port} está ocupado. Prueba: node scripts/serve.mjs --port ${port + 1}`);
-  } else {
-    console.error(error.message);
+    const scheme = useHttps ? 'https' : 'http';
+    const local = `${scheme}://localhost:${port}`;
+    // Doble clic dos veces: la app ya está en marcha, solo hay que abrirla.
+    console.log(`\nMi Plan AWS ya está en marcha en ${local}`);
+    console.log('Abriendo el navegador. Puedes cerrar esta ventana.\n');
+    if (openBrowser) {
+      const command =
+        process.platform === 'win32'
+          ? `start "" "${local}"`
+          : process.platform === 'darwin'
+            ? `open "${local}"`
+            : `xdg-open "${local}"`;
+      exec(command);
+    }
+    process.exit(0);
   }
+  console.error(error.message);
   process.exit(1);
 });

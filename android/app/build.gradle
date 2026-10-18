@@ -7,8 +7,13 @@ android {
         applicationId "com.miplan.aws"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 11200
-        versionName "1.2.0"
+        // La versión se escribe en android/version.properties desde package.json
+        // (lo hace scripts/build-apk.mjs) para no duplicar el número.
+        def versionProps = new Properties()
+        def versionFile = rootProject.file('version.properties')
+        if (versionFile.exists()) { versionFile.withInputStream { versionProps.load(it) } }
+        versionName versionProps.getProperty('versionName', '1.2.1')
+        versionCode versionProps.getProperty('versionCode', '10201').toInteger()
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
