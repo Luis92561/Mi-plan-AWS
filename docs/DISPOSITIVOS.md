@@ -47,7 +47,7 @@ La consola imprime la dirección para el móvil, por ejemplo `http://192.168.1.4
 > Si macOS bloquea el archivo («no se puede abrir porque proviene de un desarrollador no
 > identificado»): clic derecho → **Abrir** → **Abrir**.
 
-## 3. Móviles (Wi-Fi de casa)
+## 3. Móviles por Wi-Fi (alternativa sin instalar nada)
 
 Requisito: el equipo que sirve la app **encendido** y ambos en la **misma red Wi-Fi**.
 Windows y macOS tienen que permitir la conexión entrante en el puerto **7420** (el
@@ -69,7 +69,48 @@ simulacros, exportar Markdown, `.ics`, respaldo JSON). **Qué no:** el service w
 offline) y las notificaciones del navegador — la app lo detecta y te ofrece el `.ics` como
 alternativa, nunca falla en silencio.
 
-## 4. Opcional: offline de verdad en el móvil (HTTPS con certificado propio)
+## 4. Android: APK propio (Huawei Mate 10 Pro)
+
+La app también se empaqueta como **APK instalable**, sin cuentas ni tiendas. El archivo
+está en [`deliverables/miplan-aws-1.2.0.apk`](../deliverables/miplan-aws-1.2.0.apk)
+(4 MB, firmado con un keystore propio).
+
+**Instalarlo en el Huawei**
+
+1. Pasa el `.apk` al teléfono (cable USB, correo, Telegram/WhatsApp «guardar archivo»).
+2. En el teléfono, abre el archivo con **Archivos**.
+3. EMUI pedirá permiso: **Ajustes → Seguridad → Instalar apps desconocidas → Archivos**
+   (o «Permitir desde esta fuente»), y vuelve a abrir el APK.
+4. Instalar → abrir. La app arranca con fondo oscuro, sin barra de navegador y funciona
+   **sin conexión** desde el primer momento (los archivos van dentro del APK).
+
+**Qué cambia respecto al navegador**
+
+| Aspecto | Navegador/PWA | APK |
+|---|---|---|
+| Datos | IndexedDB de ese navegador | IndexedDB **de la app** (espacio propio) |
+| Offline | tras la primera carga | desde el primer arranque |
+| Exportar respaldo / `.ics` / vault | descarga normal | **hoja de compartir** de Android (guardar en Archivos, enviar por correo…) |
+| Actualizar | recargar | instalar el APK nuevo encima |
+
+> **Antes de desinstalar, exporta tu respaldo**: Android borra los datos de la app al
+> desinstalarla. El respaldo JSON (que sale por la hoja de compartir) es la red de
+> seguridad.
+
+**Volver a compilarlo** (necesita JDK 21 y Android SDK 35; ya quedaron instalados en
+`%LOCALAPPDATA%\Android\`):
+
+```powershell
+npm run apk          # APK de release firmado → deliverables/miplan-aws-<versión>.apk
+npm run apk:debug    # APK de depuración (para inspeccionar con chrome://inspect)
+```
+
+- La clave de firma vive en `android/keystore/miplan-release.jks` y sus credenciales en
+  `android/keystore.properties` (ambos **fuera de git**). **Guárdalos**: si los pierdes no
+  podrás actualizar el APK sin desinstalar (y perder los datos).
+- `npm run android:sync` reempaqueta solo la parte web.
+
+## 5. Opcional: offline de verdad en el móvil (HTTPS con certificado propio)
 
 El service worker exige contexto seguro. Para tenerlo en el teléfono, sirve por HTTPS con
 un certificado tuyo:
@@ -96,7 +137,7 @@ La primera visita dará un aviso de certificado no reconocido:
 > El certificado incluye las IPs de tu LAN en el momento de generarlo. Si el router te
 > cambia la IP, vuelve a ejecutar `npm run cert:lan`.
 
-## 5. Mover tus datos entre dispositivos
+## 6. Mover tus datos entre dispositivos
 
 1. En el dispositivo de origen: **Ajustes → Respaldo → Exportar JSON**
    (`miplan-aws-YYYY-MM-DD.json`).
@@ -106,7 +147,7 @@ La primera visita dará un aviso de certificado no reconocido:
 Importar dos veces el mismo archivo no duplica nada (`merge` por id). Si activas la frase
 de paso, el respaldo se descarga cifrado (`.json.enc`) y se importa descifrándolo en la app.
 
-## 6. Lo que no se puede sin pagar
+## 7. Lo que no se puede sin pagar
 
 - **Instalar la PWA desde un archivo** (`file://`): el service worker necesita HTTPS o
   `localhost`, y en el móvil no hay `localhost`.
@@ -115,7 +156,7 @@ de paso, el respaldo se descarga cifrado (`.json.enc`) y se importa descifrándo
 - **Sincronización automática** entre dispositivos: eso exige servidor (fase 3.1, fuera del
   MVP). El transporte soportado hoy es el respaldo JSON.
 
-## 7. Si algo no abre
+## 8. Si algo no abre
 
 | Síntoma | Causa probable | Solución |
 |---|---|---|

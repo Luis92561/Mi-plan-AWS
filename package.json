@@ -1,7 +1,7 @@
 {
   "name": "mi-plan-aws",
   "private": true,
-  "version": "1.1.1",
+  "version": "1.2.0",
   "type": "module",
   "description": "Mi Plan AWS — panel local-first para trackear la ruta de certificaciones AWS",
   "scripts": {
@@ -22,9 +22,16 @@
     "serve:lan": "node scripts/serve.mjs --lan --open",
     "serve:lan:https": "node scripts/serve.mjs --lan --https",
     "cert:lan": "node scripts/make-cert.mjs",
-    "test:server": "playwright test tests/e2e/local-server.spec.ts tests/e2e/local-server-https.spec.ts"
+    "test:server": "playwright test tests/e2e/local-server.spec.ts tests/e2e/local-server-https.spec.ts",
+    "apk": "node scripts/build-apk.mjs",
+    "apk:debug": "node scripts/build-apk.mjs --debug",
+    "android:sync": "npm run build && npx cap sync android"
   },
   "dependencies": {
+    "@capacitor/android": "^7.6.9",
+    "@capacitor/core": "^7.6.9",
+    "@capacitor/filesystem": "^7.1.9",
+    "@capacitor/share": "^7.0.4",
     "@fontsource/ibm-plex-serif": "^5.1.0",
     "@fontsource/jetbrains-mono": "^5.1.0",
     "@hookform/resolvers": "^3.9.0",
@@ -58,6 +65,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@capacitor/cli": "^7.6.9",
     "@eslint/js": "^9.11.1",
     "@playwright/test": "^1.47.2",
     "@testing-library/jest-dom": "^6.5.0",

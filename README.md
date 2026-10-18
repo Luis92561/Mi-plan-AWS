@@ -48,7 +48,8 @@ jobs (verificación, end-to-end y offline con service worker) y la guía de publ
 |---|---|:--:|:--:|
 | Windows | doble clic en `start-windows.cmd` | ✅ | ✅ |
 | Mac Intel | doble clic en `start-mac.command` | ✅ | ✅ |
-| iPhone / Android (misma Wi-Fi) | `npm run serve:lan` y abrir la IP que imprime | ✅ | ✅ solo con `--https` + certificado propio |
+| iPhone (misma Wi-Fi) | `npm run serve:lan` y abrir la IP que imprime | ✅ | ✅ solo con `--https` + certificado propio |
+| **Android / Huawei** | **APK propio**: `deliverables/miplan-aws-1.2.0.apk` (`npm run apk`) | ✅ nativo | ✅ desde el primer arranque |
 
 Sin cuentas y sin pagar nada. Los pasos completos (incluido cómo mover los datos entre
 dispositivos con el respaldo JSON y qué no es posible gratis) están en

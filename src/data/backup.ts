@@ -156,13 +156,60 @@ export function downloadText(filename: string, content: string, mime = 'applicat
 }
 
 export function downloadBlob(filename: string, blob: Blob): void {
-  const url = URL.createObjectURL(blob);
-  const anchor = document.createElement('a');
-  anchor.href = url;
-  anchor.download = filename;
-  anchor.rel = 'noopener';
-  document.body.appendChild(anchor);
-  anchor.click();
-  document.body.removeChild(anchor);
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  void shareInNativeShell(filename, blob).then((handled) => {
+    if (handled) return;
+    // Navegador: descarga normal con un enlace temporal.
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = filename;
+    anchor.rel = 'noopener';
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  });
+}
+
+/**
+ * En el APK (Capacitor/Android) el WebView no descarga con `<a download>`: se escribe
+ * el archivo en la caché de la app y se abre la hoja de compartir del sistema, que
+ * permite guardarlo en Archivos, enviarlo por WhatsApp/correo o abrirlo con la app que
+ * corresponda. En el navegador devuelve `false` y se usa la descarga normal.
+ */
+async function shareInNativeShell(filename: string, blob: Blob): Promise<boolean> {
+  try {
+    const { Capacitor } = await import('@capacitor/core');
+    if (!Capacitor.isNativePlatform()) return false;
+
+    const { Filesystem, Directory, Encoding } = await import('@capacitor/filesystem');
+    const { Share } = await import('@capacitor/share');
+
+    const base64 = await toBase64(blob);
+    await Filesystem.writeFile({
+      path: filename,
+      data: base64,
+      directory: Directory.Cache,
+      encoding: undefined,
+    });
+    const { uri } = await Filesystem.getUri({ path: filename, directory: Directory.Cache });
+    await Share.share({ title: filename, url: uri, dialogTitle: filename });
+    // `Encoding` se mantiene importado para futuras exportaciones de texto sin base64.
+    void Encoding;
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function toBase64(blob: Blob): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error('No se pudo leer el archivo'));
+    reader.onload = () => {
+      const result = String(reader.result ?? '');
+      resolve(result.slice(result.indexOf(',') + 1));
+    };
+    reader.readAsDataURL(blob);
+  });
 }

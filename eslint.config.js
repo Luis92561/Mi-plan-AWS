@@ -21,6 +21,8 @@ export default tseslint.config(
       'test-results/**',
       '.tmp/**',
       '.npm-cache/**',
+      'android/**',
+      'deliverables/**',
       '*.tmp.*',
       'tmp-*',
       '.dsh-*',

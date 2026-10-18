@@ -3,6 +3,25 @@
 Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
 Versionado [SemVer](https://semver.org/lang/es/).
 
+## [1.2.0] — 2026-10-18
+
+**APK propio para Android (Huawei Mate 10 Pro)**, sin cuentas, sin tiendas y sin coste.
+
+### Añadido
+
+- Proyecto **Capacitor 7** (`android/`) con la web empaquetada dentro del APK: la app
+  funciona **sin conexión desde el primer arranque**.
+- `npm run apk` / `npm run apk:debug`: detectan JDK 17–21 y Android SDK, compilan la web,
+  sincronizan y generan el APK firmado en `deliverables/miplan-aws-<versión>.apk`.
+- **Exportaciones en la app**: en Android el WebView no descarga con `<a download>`; ahora
+  el respaldo JSON, el `.ics` y el vault `.zip` se escriben en la caché de la app y salen
+  por la **hoja de compartir** del sistema (guardar en Archivos, enviar por correo…).
+- Iconos propios (PWA 192/512 y todas las densidades de Android, incluido el adaptativo) y
+  tema nativo oscuro: sin destello blanco al abrir.
+- `docs/DISPOSITIVOS.md` con la sección de instalación del APK en EMUI, la advertencia de
+  exportar antes de desinstalar y cómo se guarda la clave de firma.
+
+
 ## [1.1.1] — 2026-10-18
 
 Uso real en tus dispositivos, **sin cuentas ni pagos**.
