@@ -3,6 +3,30 @@
 Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
 Versionado [SemVer](https://semver.org/lang/es/).
 
+## [1.1.1] — 2026-10-18
+
+Uso real en tus dispositivos, **sin cuentas ni pagos**.
+
+### Añadido
+
+- `scripts/serve.mjs`: servidor estático **sin dependencias** para el build (HTTP/HTTPS,
+  exposición en LAN, fallback de SPA, caché correcta para `index.html`/`sw.js`).
+- `scripts/make-cert.mjs`: certificado autofirmado con las IPs de tu red para servir por
+  HTTPS y tener la PWA offline en el móvil.
+- `start-windows.cmd` y `start-mac.command`: doble clic → instala si hace falta, compila
+  y abre la app en `http://localhost:7420` (contexto seguro: PWA instalable sin certificados).
+- `docs/DISPOSITIVOS.md`: pasos para Windows, **Mac Intel**, **iPhone 13 Pro Max** y
+  **Huawei Mate 10 Pro**, cómo mover los datos por respaldo JSON y qué no es posible gratis.
+- Scripts: `npm run serve`, `serve:lan`, `serve:lan:https`, `cert:lan`, `test:server`.
+
+### Notas
+
+- Cada dispositivo guarda sus propios datos (IndexedDB); se transportan con
+  **Ajustes → Respaldo → Exportar/Importar JSON**. La sincronización automática sigue
+  fuera del alcance (fase 3.1).
+- En el móvil por HTTP la app funciona y se añade a la pantalla de inicio, pero el service
+  worker (offline) exige HTTPS con un certificado en el que el dispositivo confíe.
+
 ## [1.1.0] — 2026-10-18
 
 Cierre de la §11.3 y salto funcional de la fase 3.2.

@@ -1,7 +1,7 @@
 {
   "name": "mi-plan-aws",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.1.1",
   "type": "module",
   "description": "Mi Plan AWS — panel local-first para trackear la ruta de certificaciones AWS",
   "scripts": {
@@ -12,12 +12,17 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\"",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test --grep-invert pwa",
+    "test:e2e": "playwright test --grep-invert \"pwa|local-server\"",
     "test:pwa": "playwright test tests/e2e/pwa-offline.spec.ts",
     "shots": "playwright test tests/e2e/shots.spec.ts",
     "vault:demo": "vitest run tests/demo",
     "verify": "npm run lint && tsc --noEmit -p tsconfig.json && npm test && npm run build",
-    "verify:all": "npm run verify && npm run test:e2e"
+    "verify:all": "npm run verify && npm run test:e2e",
+    "serve": "node scripts/serve.mjs",
+    "serve:lan": "node scripts/serve.mjs --lan --open",
+    "serve:lan:https": "node scripts/serve.mjs --lan --https",
+    "cert:lan": "node scripts/make-cert.mjs",
+    "test:server": "playwright test tests/e2e/local-server.spec.ts tests/e2e/local-server-https.spec.ts"
   },
   "dependencies": {
     "@fontsource/ibm-plex-serif": "^5.1.0",

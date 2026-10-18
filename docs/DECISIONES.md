@@ -58,6 +58,15 @@ Fecha de cierre: **18 de octubre de 2026**.
     (resto mayor sobre los pesos) y la corrección con desglose por dominio.
     El prompt §16 pedía «CRUD de preguntas, import CSV/JSON, selección por dominio con
     pesos, puntaje estimado»; eso es exactamente lo entregado.
+19. **Uso en móvil sin cuentas ni pagos**: se añade un servidor estático propio
+    (`scripts/serve.mjs`) y dos lanzadores de doble clic para Windows y Mac. En
+    `localhost` el navegador considera el origen seguro, así que la PWA se instala y
+    funciona offline **sin certificados**; en el móvil, por HTTP, la app funciona y se
+    añade a la pantalla de inicio pero el service worker exige HTTPS, que se resuelve con
+    un certificado propio (`npm run cert:lan`) en el que el dispositivo debe confiar una
+    vez. **No se sincroniza nada**: cada dispositivo guarda su IndexedDB y el transporte
+    es el respaldo JSON (documentado en `docs/DISPOSITIVOS.md`). F3.1 (sync con servidor)
+    sigue fuera por decisión de producto.
 17. **CI y publicación**: `.github/workflows/ci.yml` con tres jobs (verificación
     lint+tipos+tests+build, end-to-end y offline real con service worker) y
     `npm run verify` que ejecuta localmente lo mismo que el job de verificación.

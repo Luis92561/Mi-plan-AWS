@@ -58,4 +58,11 @@ export default tseslint.config(
       ],
     },
   },
+  {
+    // Los scripts de consola (servidor local, certificado) sí hablan por stdout.
+    files: ['scripts/**/*.mjs'],
+    rules: {
+      'no-console': 'off',
+    },
+  },
 );
