@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.tmp/
+.npm-cache/
+coverage/
+test-results/
+playwright-report/
+*.local
+*.log
+tmp-*
+.DS_Store
+*.tsbuildinfo

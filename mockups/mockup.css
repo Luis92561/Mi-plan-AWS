@@ -1,0 +1,121 @@
+/* =============================================================================
+   mockups/mockup.css — referencia visual de "Mi Plan AWS"
+   Mismas variables que `src/styles/tokens.css` (fuente única de verdad).
+   Las capturas de referencia (`01-dashboard-dark-es.png`, `02-dashboard-light-en.png`,
+   `03-hoy-mobile-dark-es.png`) se generan desde la app real con `npm run shots`:
+   no son un diseño separado, son la app compilada.
+   ========================================================================== */
+
+.mockup {
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-read: 'IBM Plex Serif', Georgia, serif;
+
+  /* Escala §9.2 */
+  --t-label: 11px;
+  --t-meta: 12px;
+  --t-ui: 13px;
+  --t-body: 15px;
+  --t-read: 17px;
+  --t-h3: 20px;
+  --t-h2: 26px;
+  --t-display: 34px;
+
+  /* Ritmo §9.5 */
+  --r-card: 10px;
+  --r-input: 6px;
+  --r-chip: 999px;
+  --shell: 1180px;
+  --sidebar: 240px;
+
+  font-family: var(--font-mono);
+  font-size: var(--t-body);
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.mockup[data-theme='dark'] {
+  --bg: #0a0b0d;
+  --panel: #121418;
+  --panel-2: #171a1f;
+  --line: #262a31;
+  --line-strong: #3a3f48;
+  --text: #e8eaed;
+  --muted: #98a0aa;
+  --accent: #ff9900;
+  --accent-ink: #0a0b0d;
+  --ok: #45d483;
+  --warn: #ffc24b;
+  --err: #ff6b6b;
+}
+
+.mockup[data-theme='light'] {
+  --bg: #f6f3ec;
+  --panel: #fffdf8;
+  --panel-2: #fbf8f1;
+  --line: #ded8cb;
+  --line-strong: #c9c1b0;
+  --text: #141414;
+  --muted: #6b6459;
+  --accent: #b45309;
+  --accent-ink: #fffdf8;
+  --ok: #1f7a4d;
+  --warn: #8a5a00;
+  --err: #a61b1b;
+}
+
+/* Reglas de composición que la app respeta: 12 columnas, gutters 24/32,
+   reglas de 1 px en lugar de sombras, cifras tabulares y etiquetas espaciadas. */
+.mockup-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 24px;
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.mockup-label {
+  font-size: var(--t-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.mockup-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  padding: 14px 16px;
+}
+
+.mockup-ledger {
+  width: 100%;
+  border-collapse: collapse;
+}
+.mockup-ledger th {
+  border-bottom: 2px solid var(--line-strong);
+  padding: 8px 12px;
+  text-align: left;
+  font-size: var(--t-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+.mockup-ledger td {
+  border-bottom: 1px solid var(--line);
+  padding: 10px 12px;
+  font-size: var(--t-ui);
+}
+.mockup-ledger .num {
+  text-align: right;
+}
+
+/* El acento ocupa ≤10 % de la pantalla: se declara aquí para que la referencia
+   sea explícita sobre la restricción. */
+.mockup-accent {
+  color: var(--accent);
+  background: var(--accent);
+}

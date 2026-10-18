@@ -1,0 +1,317 @@
+/* =============================================================================
+   Mi Plan AWS — tokens de diseño ("terminal editorial")
+   Único lugar del proyecto donde se escribe un color literal.
+   Paleta exacta de la especificación §9.3. Los componentes usan clases
+   Tailwind (bg-panel, text-muted, border-line, …) que apuntan aquí.
+   ========================================================================== */
+
+:root {
+  /* Tipografía (§9.2) — pesos 400/500/700 solamente */
+  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-read: 'IBM Plex Serif', Georgia, 'Times New Roman', serif;
+
+  /* Escala de fuente ajustable 90–130 % (ajustes → --fs-base) */
+  --fs-base: 1;
+  --t-label: calc(11px * var(--fs-base));
+  --t-meta: calc(12px * var(--fs-base));
+  --t-ui: calc(13px * var(--fs-base));
+  --t-body: calc(15px * var(--fs-base));
+  --t-read: calc(17px * var(--fs-base));
+  --t-h3: calc(20px * var(--fs-base));
+  --t-h2: calc(26px * var(--fs-base));
+  --t-display: calc(34px * var(--fs-base));
+
+  --tracking-label: 0.08em;
+  --measure-terminal: 72ch;
+  --measure-read: 68ch;
+
+  /* Ritmo: radios (§9.5) */
+  --r-card: 10px;
+  --r-input: 6px;
+  --r-chip: 999px;
+
+  --dur-hover: 120ms;
+  --dur-active: 80ms;
+
+  --z-header: 40;
+  --z-overlay: 60;
+  --z-toast: 80;
+}
+
+/* ------------------------------------------------------------------ oscuro */
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #0a0b0d;
+  --panel: #121418;
+  --panel-2: #171a1f;
+  --line: #262a31;
+  --line-strong: #3a3f48;
+  --text: #e8eaed;
+  --muted: #98a0aa;
+  --accent: #ff9900;
+  --accent-ink: #0a0b0d;
+  --ok: #45d483;
+  --warn: #ffc24b;
+  --err: #ff6b6b;
+
+  /* Tripletas RGB: permiten los modificadores de opacidad de Tailwind (bg-panel/60)
+     sin repetir colores en los componentes. */
+  --bg-rgb: 10 11 13;
+  --panel-rgb: 18 20 24;
+  --panel-2-rgb: 23 26 31;
+  --line-rgb: 38 42 49;
+  --line-strong-rgb: 58 63 72;
+  --text-rgb: 232 234 237;
+  --muted-rgb: 152 160 170;
+  --accent-rgb: 255 153 0;
+  --accent-ink-rgb: 10 11 13;
+  --ok-rgb: 69 212 131;
+  --warn-rgb: 255 194 75;
+  --err-rgb: 255 107 107;
+  --control-line-rgb: 106 115 128;
+  --overlay: rgba(0, 0, 0, 0.55);
+
+  /* Derivados: nunca se escriben a mano en los componentes */
+  --control-line: #6a7380; /* borde de controles: 3.84:1 sobre --panel, 4.10:1 sobre --bg */
+  --hover-tint: rgba(232, 234, 237, 0.05);
+  --active-tint: rgba(232, 234, 237, 0.09);
+  --zebra: rgba(232, 234, 237, 0.02);
+  --header-bg: rgba(10, 11, 13, 0.78);
+  --shadow-overlay: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-soft: none;
+  --focus-ring: var(--accent);
+  --scroll-thumb: #2f343b;
+}
+
+/* -------------------------------------------------------------------- claro */
+[data-theme='light'] {
+  color-scheme: light;
+
+  --bg: #f6f3ec;
+  --panel: #fffdf8;
+  --panel-2: #fbf8f1;
+  --line: #ded8cb;
+  --line-strong: #c9c1b0;
+  --text: #141414;
+  --muted: #6b6459;
+  --accent: #b45309;
+  --accent-ink: #fffdf8;
+  --ok: #1f7a4d;
+  --warn: #8a5a00;
+  --err: #a61b1b;
+
+  --bg-rgb: 246 243 236;
+  --panel-rgb: 255 253 248;
+  --panel-2-rgb: 251 248 241;
+  --line-rgb: 222 216 203;
+  --line-strong-rgb: 201 193 176;
+  --text-rgb: 20 20 20;
+  --muted-rgb: 107 100 89;
+  --accent-rgb: 180 83 9;
+  --accent-ink-rgb: 255 253 248;
+  --ok-rgb: 31 122 77;
+  --warn-rgb: 138 90 0;
+  --err-rgb: 166 27 27;
+  --control-line-rgb: 139 131 117;
+  --overlay: rgba(20, 20, 20, 0.45);
+
+  --control-line: #8b8375; /* borde de controles: 3.69:1 sobre --panel, 3.38:1 sobre --bg */
+  --hover-tint: rgba(20, 20, 20, 0.04);
+  --active-tint: rgba(20, 20, 20, 0.07);
+  --zebra: rgba(20, 20, 20, 0.02);
+  --header-bg: rgba(246, 243, 236, 0.8);
+  --shadow-overlay: 0 8px 24px rgba(20, 20, 20, 0.14);
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --focus-ring: var(--accent);
+  --scroll-thumb: #c9c1b0;
+}
+
+/* `color-scheme: dark light` en :root para scrollbars y controles nativos */
+:root {
+  color-scheme: dark light;
+}
+
+/* ============================================================== base reset */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: var(--t-body);
+  font-weight: 400;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+  max-width: var(--measure-terminal);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  caret-color: var(--accent);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted);
+  opacity: 0.75;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+}
+
+th {
+  text-align: left;
+  font-weight: 500;
+}
+
+/* Foco visible en todo elemento interactivo (§9.8) */
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+* {
+  scrollbar-color: var(--scroll-thumb) transparent;
+  scrollbar-width: thin;
+}
+
+/* Modo lectura: solo la prosa cambia a serif (§9.2) */
+[data-font='lectura'] .prose-read,
+[data-font='lectura'] .prose-read p,
+[data-font='lectura'] .prose-read li {
+  font-family: var(--font-read);
+  font-size: var(--t-read);
+  line-height: 1.72;
+  max-width: var(--measure-read);
+}
+
+/* Movimiento reducido (§9.8) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Utilidades de capa terminal/clásica (§9.4, §9.6) */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+.label-mono {
+  font-size: var(--t-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.section-no {
+  font-size: var(--t-label);
+  letter-spacing: var(--tracking-label);
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.rule-dotted {
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--line-strong);
+  user-select: none;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+}
+
+.card-2 {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+}
+
+.zebra tbody tr:nth-child(even) {
+  background: var(--zebra);
+}
+
+.shimmer {
+  background: linear-gradient(90deg, var(--panel-2) 0%, var(--hover-tint) 50%, var(--panel-2) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer {
+    animation: none;
+    background: var(--panel-2);
+  }
+}

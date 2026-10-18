@@ -1,0 +1,58 @@
+@import './tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-bg text-text font-mono;
+  }
+}
+
+@layer components {
+  /* Regla de sección: barra de 1 px + aire (capa clásica §9.4) */
+  .section-rule {
+    border-top: 1px solid var(--line);
+  }
+
+  .ledger th {
+    border-bottom: 2px solid var(--line-strong);
+    padding: 8px 12px;
+    font-size: var(--t-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .ledger td {
+    border-bottom: 1px solid var(--line);
+    padding: 10px 12px;
+    font-size: var(--t-ui);
+    vertical-align: top;
+  }
+
+  .ledger .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .chip-mono {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-chip);
+    padding: 1px 8px;
+    font-size: var(--t-label);
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .prose-read p,
+  .prose-read li {
+    max-width: var(--measure-terminal);
+  }
+}

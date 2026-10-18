@@ -1,0 +1,232 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`buildVault > genera el árbol de archivos del Anexo C.1 1`] = `
+[
+  "AWS/CLF-C02 — Cloud Practitioner/CLF-C02 — Checklist.md",
+  "AWS/CLF-C02 — Cloud Practitioner/CLF-C02 — Resumen.md",
+  "AWS/CLF-C02 — Cloud Practitioner/Dominios/01 — Cloud Concepts.md",
+  "AWS/CLF-C02 — Cloud Practitioner/Dominios/02 — Security & Compliance.md",
+  "AWS/CLF-C02 — Cloud Practitioner/Sesiones/2026/2026-02-10.md",
+  "AWS/CLF-C02 — Cloud Practitioner/Simulacros/2026-02-14 — Examen oficial.md",
+  "AWS/CLF-C02 — Cloud Practitioner/Temas/Billing — Modelos de precios.md",
+  "AWS/SAA-C03 — Solutions Architect Associate/Dominios/01 — Design Secure Architectures.md",
+  "AWS/SAA-C03 — Solutions Architect Associate/Dominios/02 — Design Resilient Architectures.md",
+  "AWS/SAA-C03 — Solutions Architect Associate/Dominios/03 — Design High-Performing Architectures.md",
+  "AWS/SAA-C03 — Solutions Architect Associate/Dominios/04 — Design Cost-Optimized Architectures.md",
+  "AWS/SAA-C03 — Solutions Architect Associate/SAA-C03 — Checklist.md",
+  "AWS/SAA-C03 — Solutions Architect Associate/SAA-C03 — Resumen.md",
+  "AWS/SAA-C03 — Solutions Architect Associate/Sesiones/2026/2026-10-12.md",
+  "AWS/SAA-C03 — Solutions Architect Associate/Sesiones/2026/2026-10-14.md",
+  "AWS/SAA-C03 — Solutions Architect Associate/Sesiones/2026/2026-10-16.md",
+  "AWS/SAA-C03 — Solutions Architect Associate/Sesiones/2026/2026-10-18.md",
+  "AWS/SAA-C03 — Solutions Architect Associate/Simulacros/2026-10-05 — Set oficial 20.md",
+  "AWS/SAA-C03 — Solutions Architect Associate/Simulacros/2026-10-12 — Mock propio.md",
+  "AWS/SAA-C03 — Solutions Architect Associate/Temas/IAM — Políticas vs. roles.md",
+  "AWS/SAA-C03 — Solutions Architect Associate/Temas/S3 — Clases de almacenamiento.md",
+  "AWS/SAA-C03 — Solutions Architect Associate/Temas/VPC — Endpoints.md",
+  "AWS/_Calendario.md",
+  "AWS/_Checklist.md",
+  "AWS/_Ruta AWS.md",
+]
+`;
+
+exports[`buildVault > genera la nota de certificación completa 1`] = `
+"---
+title: "SAA-C03 — Solutions Architect Associate"
+aliases: ["SAA-C03", "Solutions Architect Associate"]
+type: aws-certification
+code: SAA-C03
+level: associate
+phase: 2
+status: estudiando
+readiness: 76
+price_usd: 150
+passing_score: 720
+exam_date: 2026-12-05
+domains:
+  - "Design Secure Architectures"
+  - "Design Resilient Architectures"
+  - "Design High-Performing Architectures"
+  - "Design Cost-Optimized Architectures"
+tags:
+  - aws
+  - aws/associate
+  - cert/SAA-C03
+lang: es
+updated: 2026-10-18T18:32:00-05:00
+source: "Mi Plan AWS"
+schema: 1
+---
+
+# SAA-C03 — Solutions Architect Associate
+
+> [!info] Datos del examen
+> - **Nivel:** Associate · **Fase:** 2
+> - **Precio:** 150 USD · **Duración:** 130 min · **Preguntas:** 65 · **Aprueba:** 720
+> - **Guía oficial:** https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03.html
+> - **Estado:** estudiando · **Readiness:** 76 %
+
+## Dominios
+
+| Dominio | Peso | Práctica | Estado |
+|---|---:|---:|:--:|
+| [[01 — Design Secure Architectures]] | 30 % | 77 % | ◐ |
+| [[02 — Design Resilient Architectures]] | 26 % | 71 % | ◐ |
+| [[03 — Design High-Performing Architectures]] | 24 % | 69 % | ◐ |
+| [[04 — Design Cost-Optimized Architectures]] | 20 % | 67 % | ◐ |
+
+## Checklist
+
+> [!todo] Preparación
+> - [x] Leer la guía oficial
+> - [x] Curso Exam Prep (Skill Builder)
+> - [ ] 2 labs prácticos 📅 2026-10-25
+
+> [!todo] Práctica
+> - [ ] Set oficial de 20 preguntas ≥ 80 %
+> - [ ] Simulacro completo ≥ 75 %
+> - [ ] Simulacro semanal 📅 2026-10-20
+
+> [!todo] Examen
+> - [ ] Agendar examen 📅 2026-12-05
+
+## Temas
+
+- [[IAM — Políticas vs. roles]] · en curso
+- [[S3 — Clases de almacenamiento]] · repaso 2026-10-21
+- [[VPC — Endpoints]] · repaso 2026-10-23
+
+## Simulacros
+
+| Fecha | Fuente | Aciertos | Estimado | Estado |
+|---|---|---:|---:|:--:|
+| 2026-10-12 | Mock propio | 46/65 | 737 | ✓ |
+| 2026-10-05 | Set oficial 20 | 16/20 | 820 | ✓ |
+
+## Notas
+
+### Errores del simulacro
+
+Confundir *security group* con *NACL* en el simulacro del 12-oct.
+
+Revisar bucket policies
+
+### Dudas de S3
+
+¿Cuándo conviene *Intelligent-Tiering* frente a una lifecycle rule?
+
+![[2026-10-18]]
+
+![[2026-10-16]]
+
+![[2026-10-14]]
+
+> [!note]- Si usas Dataview
+> \`\`\`\`dataview
+> TABLE weight AS Peso, accuracy AS Práctica, status AS Estado
+> FROM "AWS/SAA-C03 — Solutions Architect Associate/Dominios"
+> WHERE type = "aws-domain"
+> SORT weight DESC
+> \`\`\`\`
+"
+`;
+
+exports[`buildVault > genera la nota de dominio completa 1`] = `
+"---
+title: "01 — Design Secure Architectures"
+aliases: ["Design Secure Architectures"]
+type: aws-domain
+cert: SAA-C03
+weight: 0.3
+accuracy: 0.77
+status: estudiando
+tags: [aws, cert/SAA-C03]
+lang: es
+updated: 2026-10-18T18:32:00-05:00
+source: "Mi Plan AWS"
+schema: 1
+---
+
+# 01 — Design Secure Architectures
+
+[[SAA-C03 — Resumen]] · Peso **30 %** · Práctica **77 %** · Estado ◐
+
+## Temas
+
+- [[IAM — Políticas vs. roles]] · ◐ en curso
+- [[VPC — Endpoints]] · ○ pendiente
+
+## Sesiones
+
+- [[2026-10-14]] · 45 min
+- [[2026-10-18]] · 45 min
+
+## Notas
+
+### Errores del simulacro
+
+Confundir *security group* con *NACL* en el simulacro del 12-oct.
+
+Revisar bucket policies
+
+> [!note]- Si usas Dataview
+> \`\`\`\`dataview
+> TABLE status AS Estado, confidence AS Confianza, next_review AS Próxima revisión
+> FROM "AWS/SAA-C03 — Solutions Architect Associate/Temas"
+> WHERE type = "aws-topic" AND domain = "Design Secure Architectures"
+> SORT priority ASC
+> \`\`\`\`
+"
+`;
+
+exports[`buildVault > genera la nota de tema completa 1`] = `
+"---
+title: "S3 — Clases de almacenamiento"
+aliases: ["S3 — Clases de almacenamiento"]
+type: aws-topic
+cert: SAA-C03
+domain: "Design Resilient Architectures"
+status: repasando
+confidence: 4
+interval_days: 7
+next_review: 2026-10-21
+tags: [aws, cert/SAA-C03, topic/S3]
+lang: es
+updated: 2026-10-18T18:32:00-05:00
+source: "Mi Plan AWS"
+schema: 1
+---
+
+# S3 — Clases de almacenamiento
+
+[[SAA-C03 — Resumen]] · [[02 — Design Resilient Architectures]]
+
+## Qué debo saber
+
+| Clase | Uso | Recuperación |
+|---|---|---|
+| Standard | acceso frecuente | inmediata |
+| Standard-IA | acceso infrecuente | inmediata |
+| Glacier Instant Retrieval | archivo con acceso | ms |
+| Glacier Deep Archive | archivo largo plazo | 12 h |
+
+## Repaso
+
+> [!tip] Próxima revisión
+> 2026-10-21 · Confianza: 4/5
+
+## Notas
+
+### Dudas de S3
+
+¿Cuándo conviene *Intelligent-Tiering* frente a una lifecycle rule?
+
+> [!note]- Si usas Dataview
+> \`\`\`\`dataview
+> TABLE status AS Estado, confidence AS Confianza, next_review AS Próxima revisión
+> FROM "AWS/SAA-C03 — Solutions Architect Associate/Temas"
+> WHERE type = "aws-topic" AND domain = "Design Resilient Architectures"
+> SORT priority ASC
+> \`\`\`\`
+"
+`;

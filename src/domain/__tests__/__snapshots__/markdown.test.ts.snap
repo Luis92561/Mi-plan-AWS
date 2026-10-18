@@ -1,0 +1,25 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renderWeeklySummary > incluye horas, sesiones y próximos hitos 1`] = `
+"# Resumen semanal
+
+**Semana:** 2026-10-12 → 2026-10-18 · **Horas:** 3 h 30 min (3,5 h · 210 min) · **Sesiones:** 4 · **Meta semanal:** 8 h
+
+## Por certificación
+
+| Certificación | Sesiones | Horas |
+|---|---:|---:|
+| SAA-C03 | 4 | 3 h 30 min |
+
+## Temas dominados
+
+- Billing — Modelos de precios · CLF-C02
+
+## Próximos hitos
+
+- 2026-10-21 · Repaso S3 — Clases de almacenamiento · SAA-C03
+- 2026-10-23 · Repaso VPC — Endpoints · SAA-C03
+- 2026-11-30 · Voucher 50 % por aprobar CLF-C02
+- 2026-12-05 · Examen SAA-C03
+"
+`;
