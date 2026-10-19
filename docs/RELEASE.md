@@ -8,7 +8,7 @@ Nginx, GitHub Pages) o servir localmente con `npm run preview`.
 
 ```bash
 npm run verify        # lint + tipos + tests + build
-npm run test:e2e      # 16 pruebas de navegador
+npm run test:e2e      # 23 pruebas de navegador
 npm run test:pwa      # opcional: offline real contra `vite preview`
 ```
 
@@ -16,7 +16,8 @@ Requisitos del repositorio (los mismos que ejecuta el CI de `.github/workflows/c
 
 - `npm run lint` sin errores ni warnings.
 - `npx tsc --noEmit -p tsconfig.json` limpio (strict).
-- `npm test` verde (296 tests).
+- `npm test` verde (310 tests en 31 archivos; el conteo crece con cada tarea que añade
+  cobertura — confírmalo con `npm test`, no con este número).
 - `npm run build` sin errores; inicial ≤250 KB gzip.
 - Lighthouse móvil ≥90 en Performance, Accessibility y Best Practices
   (ver [`LIGHTHOUSE.md`](LIGHTHOUSE.md) para el comando exacto).

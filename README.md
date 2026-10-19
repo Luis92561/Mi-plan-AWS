@@ -24,10 +24,10 @@ npm install          # dependencias
 npm run dev          # entorno de desarrollo (http://localhost:5173)
 npm run build        # build de producción en dist/ (tsc -b + vite build)
 npm run preview      # sirve el build (necesario para probar la PWA/offline)
-npm run verify       # lint + tipos + 296 tests + build (lo mismo que el CI)
+npm run verify       # lint + tipos + 310 tests + build (lo mismo que el CI)
 npm run verify:all   # lo anterior + end-to-end
 npm test             # tests unitarios y de integración (vitest)
-npm run test:e2e     # 16 escenarios end-to-end (Playwright)
+npm run test:e2e     # 23 escenarios end-to-end (Playwright)
 npm run test:pwa     # offline real con service worker (requiere `vite preview`)
 npm run lint         # ESLint (flat config)
 npm run shots        # regenera las capturas de docs/shots y mockups/
@@ -164,9 +164,9 @@ Regla de dependencias: `features → domain`, `features → data`; **nunca**
 
 ```bash
 npm run lint    # 0 errores, 0 warnings
-npm test        # 296 tests (28 archivos)
+npm test        # 310 tests (31 archivos; el conteo crece con cada tarea)
 npm run build   # tsc -b + vite build sin errores
-npm run test:e2e  # 16 pruebas end-to-end en Chromium (escenarios §11.2 + exportaciones + capturas)
+npm run test:e2e  # 23 pruebas end-to-end en Chromium (escenarios §11.2 + exportaciones + capturas)
 npm run test:pwa  # opcional: offline real contra `vite preview` (ver abajo)
 ```
 

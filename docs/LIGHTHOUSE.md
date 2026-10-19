@@ -46,7 +46,11 @@ El entorno de agentes usó el Chromium de Playwright
    gzip) y `data` (dexie + zod) aunque solo se usan en pantallas perezosas: el inicial
    real era 325 KB gzip. Se eliminaron esos `manualChunks`, de modo que el único
    `modulepreload` es React y `recharts`/`zod`/`jszip` se descargan al abrir su pantalla.
-   Inicial resultante: **214,5 KB gzip** (152,5 + 53,8 + 8,2).
+   Inicial resultante: **218,8 KB gzip** (`index` 156,76 + `react` 53,82 + CSS 8,25).
+   (Nota: una medición intermedia registró 214,5 KB con `index` 152,5; la cifra de
+   referencia, coincidente con `docs/DECISIONES.md` §3/§6, es 218,8 KB del build de
+   verificación del 19-10-2026, re-medido en DEV-004; el build del 18-10 registraba
+   218,7 KB.)
 
 ## Auditorías que siguen por debajo de 1 (no bloquean)
 
