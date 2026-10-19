@@ -4,7 +4,8 @@ import { dirname, join } from 'node:path';
 import { getDb } from '@/data/db';
 import { DEFAULT_EXPORT_PROFILES, ensureCatalog, loadDemoData } from '@/data/seed';
 import { readAppState } from '@/data/backup';
-import { buildVault } from '@/domain/obsidian';
+import { buildVault, degradeLinks, resolveWikiTarget } from '@/domain/obsidian';
+import type { VaultFile } from '@/domain/obsidian';
 
 /**
  * Genera `examples/vault-demo/`: un vault real ya exportado (Anexo C) para abrir
@@ -62,12 +63,37 @@ describe('vault de ejemplo', () => {
     expect(sample).toContain('_Ruta AWS.md');
     expect(sample).toContain(`${CERT_FOLDER}SAA-C03 — Resumen.md`);
 
-    for (const relative of sample) {
+    // §8.9 sobre la muestra recortada: los wikilinks degradados por el export
+    // completo apuntan a archivos que quedaron fuera de la muestra; se degradan
+    // de nuevo contra el set efectivo para entregar el demo sin enlaces rotos.
+    const available = new Set(
+      sample.map((relative) => relative.split('/').pop()?.replace(/\.md$/i, '').toLowerCase() ?? ''),
+    );
+    const written: VaultFile[] = sample.flatMap((relative) => {
       const file = files.find((candidate) => candidate.path.replace(/^AWS\//, '') === relative);
-      if (!file) continue;
-      const target = join(ROOT, relative);
+      if (!file) return [];
+      return [{ path: relative, content: degradeLinks(file.content, available, true) }];
+    });
+
+    for (const file of written) {
+      const target = join(ROOT, file.path);
       mkdirSync(dirname(target), { recursive: true });
       writeFileSync(target, file.content, 'utf8');
     }
+
+    // Integridad: ningún wikilink de la muestra puede quedar sin destino.
+    const broken: string[] = [];
+    for (const file of written) {
+      for (const match of file.content.matchAll(/(!?)\[\[([^\]]+?)\]\]/g)) {
+        const raw = match[2] ?? '';
+        const pipe = raw.indexOf('\\|') >= 0 ? raw.indexOf('\\|') : raw.indexOf('|');
+        const rawTarget = pipe >= 0 ? raw.slice(0, pipe) : raw;
+        const target = resolveWikiTarget(rawTarget);
+        if (target.length === 0 || !available.has(target.toLowerCase())) {
+          broken.push(`${file.path} → [[${raw}]]`);
+        }
+      }
+    }
+    expect(broken).toEqual([]);
   }, 60_000);
 });

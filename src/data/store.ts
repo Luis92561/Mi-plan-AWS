@@ -131,6 +131,7 @@ export async function clearAllData(): Promise<void> {
       db.notes.clear(),
       db.reminders.clear(),
       db.exportProfiles.clear(),
+      db.questions.clear(),
       db.settings.clear(),
     ]);
   });

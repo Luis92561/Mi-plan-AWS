@@ -1725,13 +1725,15 @@ function renderCalendarContent(ctx: VaultContext): string {
    Integridad de enlaces — §8.9
    ========================================================================== */
 
-function resolveWikiTarget(raw: string): string {
+/** Resuelve el destino canónico de un wikilink (§8.9). Exportado para el demo. */
+export function resolveWikiTarget(raw: string): string {
   const withoutHeading = (raw.split('#')[0] ?? '').replace(/\\$/, '');
   const segment = withoutHeading.replace(/\\/g, '/').split('/').pop() ?? '';
   return segment.replace(/\.md$/i, '').trim();
 }
 
-function degradeLinks(content: string, available: Set<string>, keepLinks: boolean): string {
+/** Degradación §8.9: wikilinks sin destino en `available` pasan a texto plano. */
+export function degradeLinks(content: string, available: Set<string>, keepLinks: boolean): string {
   return content.replace(/(!?)\[\[([^\]]+?)\]\]/g, (match, bang: string, raw: string) => {
     const escapedPipe = raw.indexOf('\\|');
     const pipe = raw.indexOf('|');

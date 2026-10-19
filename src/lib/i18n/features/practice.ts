@@ -178,6 +178,7 @@ export const practice = defineNamespace({
     'practice.bank.import.error': 'No se pudo importar: {message}',
     'practice.bank.import.readError': 'No se pudo leer el archivo: {message}',
     'practice.bank.import.emptyFile': 'El archivo está vacío.',
+    'practice.bank.import.fileTooBig': 'El archivo supera el límite de 5 MB.',
 
     'practice.bank.list.title': 'Preguntas guardadas',
     'practice.bank.list.hint': 'editar o eliminar una a una',
@@ -468,6 +469,7 @@ export const practice = defineNamespace({
     'practice.bank.import.error': 'The import failed: {message}',
     'practice.bank.import.readError': 'The file could not be read: {message}',
     'practice.bank.import.emptyFile': 'The file is empty.',
+    'practice.bank.import.fileTooBig': 'The file exceeds the 5 MB limit.',
 
     'practice.bank.list.title': 'Saved questions',
     'practice.bank.list.hint': 'edit or delete one at a time',

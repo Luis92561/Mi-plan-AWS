@@ -233,6 +233,22 @@ describe('Banco de preguntas (F3.2)', () => {
     expect(onStartMock).toHaveBeenCalledWith('SAA-C03');
   });
 
+  it('rechaza un archivo de import mayor que 5 MB sin leerlo (F-04)', async () => {
+    const user = userEvent.setup();
+    renderBank(makeState([]));
+
+    const big = new File(['x'], 'banco-grande.csv', { type: 'text/csv' });
+    Object.defineProperty(big, 'size', { value: 6 * 1024 * 1024 });
+
+    const input = screen.getByLabelText('Elegir archivo') as HTMLInputElement;
+    await user.upload(input, big);
+
+    expect(await screen.findByText('El archivo supera el límite de 5 MB.')).toBeInTheDocument();
+    // El guard rechaza antes de leer: el área de pegado queda vacía (sin previsualización).
+    expect(screen.getByLabelText('O pega el contenido')).toHaveValue('');
+    expect(await getDb().questions.count()).toBe(0);
+  });
+
   it('descarga la plantilla CSV desde el estado vacío', async () => {
     const user = userEvent.setup();
     const createObjectURL = vi.fn(() => 'blob:plantilla');

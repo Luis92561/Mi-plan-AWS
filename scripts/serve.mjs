@@ -83,6 +83,7 @@ function requestHandler(req, res) {
     'Cache-Control': immutable ? 'public, max-age=31536000, immutable' : 'no-store',
     'Service-Worker-Allowed': '/',
     'X-Content-Type-Options': 'nosniff',
+    'Referrer-Policy': 'no-referrer',
   };
   if (ext === '.html' || name === 'sw.js' || name === 'registerSW.js' || ext === '.webmanifest') {
     headers['Cache-Control'] = 'no-store';

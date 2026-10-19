@@ -20,15 +20,15 @@ schema: 1
 ## Temas
 
 - [[IAM — políticas, condiciones y roles]] · ◐ en curso
-- [[Repaso general — Design Secure Architectures]] · ○ pendiente
+- Repaso general — Design Secure Architectures · ○ pendiente
 
 ## Sesiones
 
 - [[2026-09-09]] · 60 min
-- [[2026-09-17]] · 30 min
-- [[2026-09-25]] · 25 min
-- [[2026-10-03]] · 60 min
-- [[2026-10-11]] · 30 min
+- 2026-09-17 · 30 min
+- 2026-09-25 · 25 min
+- 2026-10-03 · 60 min
+- 2026-10-11 · 30 min
 
 ## Notas
 

@@ -43,6 +43,9 @@ const FILE_PICKER = [
 
 const TEMPLATE_FILENAME = 'preguntas-plantilla.csv';
 
+/** Límite del import de banco (F-04): el respaldo JSON usa 20 MB; aquí basta 5 MB. */
+const MAX_IMPORT_BYTES = 5 * 1024 * 1024;
+
 type ImportFormat = 'auto' | 'json' | 'csv';
 
 /** Por extensión o, si no hay, por el primer carácter: `{`/`[` ⇒ JSON. */
@@ -219,6 +222,10 @@ export function QuestionBankSection({ state, onStartMock }: QuestionBankSectionP
     const file = event.target.files?.[0];
     event.target.value = '';
     if (!file) return;
+    if (file.size > MAX_IMPORT_BYTES) {
+      notify(t('practice.bank.import.fileTooBig'), 'err');
+      return;
+    }
     try {
       const text = await file.text();
       if (text.trim().length === 0) {

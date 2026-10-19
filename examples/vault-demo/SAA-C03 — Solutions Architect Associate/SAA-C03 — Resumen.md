@@ -39,8 +39,8 @@ schema: 1
 |---|---:|---:|:--:|
 | [[01 — Design Secure Architectures]] | 30 % | 83 % | ✓ |
 | [[02 — Design Resilient Architectures]] | 26 % | 78 % | ◐ |
-| [[03 — Design High-Performing Architectures]] | 24 % | 67 % | ◐ |
-| [[04 — Design Cost-Optimized Architectures]] | 20 % | 57 % | ◐ |
+| 03 — Design High-Performing Architectures | 24 % | 67 % | ◐ |
+| 04 — Design Cost-Optimized Architectures | 20 % | 57 % | ◐ |
 
 ## Checklist
 
@@ -62,11 +62,11 @@ schema: 1
 
 - [[Alta disponibilidad y recuperación ante desastres]] · repaso 2026-10-18
 - [[IAM — políticas, condiciones y roles]] · repaso 2026-10-21
-- [[Optimización de costos — Storage Lens y Compute Optimizer]] · pendiente
-- [[Repaso general — Design Cost-Optimized Architectures]] · pendiente
-- [[Repaso general — Design High-Performing Architectures]] · pendiente
-- [[Repaso general — Design Resilient Architectures]] · pendiente
-- [[Repaso general — Design Secure Architectures]] · pendiente
+- Optimización de costos — Storage Lens y Compute Optimizer · pendiente
+- Repaso general — Design Cost-Optimized Architectures · pendiente
+- Repaso general — Design High-Performing Architectures · pendiente
+- Repaso general — Design Resilient Architectures · pendiente
+- Repaso general — Design Secure Architectures · pendiente
 
 ## Simulacros
 
@@ -155,11 +155,11 @@ Primero multi-AZ; multi-región solo si el requisito de continuidad lo exige.
 ## Duda abierta
 ¿Cuándo conviene una CMK multi-región? Pendiente de revisar en la guía.
 
-![[2026-10-17]]
+2026-10-17
 
-![[2026-10-15]]
+2026-10-15
 
-![[2026-10-13]]
+2026-10-13
 
 > [!note]- Si usas Dataview
 > ````dataview

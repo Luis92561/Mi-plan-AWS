@@ -11,6 +11,12 @@
 
 /** Mínimo exigido por §10: PBKDF2-SHA256 con al menos 310 000 iteraciones. */
 export const PBKDF2_ITERATIONS = 310_000;
+/**
+ * Tope aceptado al **descifrar** (hallazgo F-01): un `.enc` ajeno no puede
+ * forzar una derivación eterna. El cifrado propio sigue emitiendo
+ * `PBKDF2_ITERATIONS`; los archivos ya exportados se descifran igual.
+ */
+export const MAX_PBKDF2_ITERATIONS = 10_000_000;
 export const SALT_BYTES = 16;
 export const IV_BYTES = 12;
 export const MIN_PHRASE_LENGTH = 8;
@@ -141,7 +147,11 @@ function readPayload(text: string): EncryptedPayload | null {
   const kdfValue = kdf as Record<string, unknown>;
   const iterations = kdfValue.iterations;
   if (kdfValue.name !== 'PBKDF2' || typeof iterations !== 'number') return null;
-  if (!Number.isFinite(iterations) || iterations < 1) return null;
+  // F-01: entero en [1, MAX_PBKDF2_ITERATIONS]. Fuera de rango ⇒ archivo inválido
+  // sin llegar a derivar la clave: un `.enc` ajeno no puede forzar una derivación eterna.
+  if (!Number.isInteger(iterations) || iterations < 1 || iterations > MAX_PBKDF2_ITERATIONS) {
+    return null;
+  }
 
   const cipher = value.cipher;
   if (typeof cipher !== 'object' || cipher === null) return null;

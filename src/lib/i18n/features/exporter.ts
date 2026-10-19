@@ -106,6 +106,8 @@ export const exporter = defineNamespace({
       'Si ya tenías una exportación anterior, renombra la carpeta vieja antes de descomprimir. No fusiones a mano.',
     'exporter.vault.step4': 'Abre la nota de la ruta y verifica que los wikilinks estén en azul.',
     'exporter.vault.private': 'Copiar y exportar es 100 % local: portapapeles y .zip se generan aquí.',
+    'exporter.vault.syncNote':
+      'Si tu vault está sincronizado con la nube (iCloud, Dropbox, Git…), estas notas también lo estarán.',
 
     /* Tamaños ---------------------------------------------------------------- */
     'exporter.size.b': '{value} B',
@@ -210,6 +212,8 @@ export const exporter = defineNamespace({
       'If you had a previous export, rename the old folder before unzipping. Do not merge by hand.',
     'exporter.vault.step4': 'Open the route note and check that the wikilinks are blue.',
     'exporter.vault.private': 'Copying and exporting is 100% local: clipboard and .zip are built right here.',
+    'exporter.vault.syncNote':
+      'If your vault is synced to the cloud (iCloud, Dropbox, Git…), these notes will be too.',
 
     /* Sizes ------------------------------------------------------------------ */
     'exporter.size.b': '{value} B',

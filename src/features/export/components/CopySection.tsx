@@ -158,6 +158,7 @@ export function CopySection({ state }: { state: AppState }) {
 
         <StatusLine text={status} />
         <p className="text-meta text-muted">{t('exporter.vault.private')}</p>
+        <p className="text-meta text-muted">{t('exporter.vault.syncNote')}</p>
       </CardBody>
     </Card>
   );

@@ -245,7 +245,11 @@ export function ResourceFormModal({ resource, defaultCertId, onOpenChange }: Res
               id="res-minutes"
               type="number"
               min={0}
-              step={5}
+              // Escala 0,1,2,…: la misma regla que `isWholeMinutes` («minutos
+              // enteros, 0 o más»). Con `step={1}` un valor como 7 caía fuera de
+              // escala y, si el form perdiera `noValidate`, el navegador abortaría
+              // el submit sin avisar (misma clase que el P-1 de «Hoy»).
+              step={1}
               inputMode="numeric"
               {...register('estimatedMin')}
             />

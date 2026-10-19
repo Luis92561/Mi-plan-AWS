@@ -20,15 +20,15 @@ schema: 1
 ## Temas
 
 - [[Alta disponibilidad y recuperación ante desastres]] · ◐ repaso
-- [[Repaso general — Design Resilient Architectures]] · ○ pendiente
+- Repaso general — Design Resilient Architectures · ○ pendiente
 
 ## Sesiones
 
 - [[2026-09-11]] · 90 min
-- [[2026-09-19]] · 45 min
-- [[2026-09-27]] · 75 min
-- [[2026-10-05]] · 90 min
-- [[2026-10-13]] · 45 min
+- 2026-09-19 · 45 min
+- 2026-09-27 · 75 min
+- 2026-10-05 · 90 min
+- 2026-10-13 · 45 min
 
 ## Notas
 

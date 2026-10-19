@@ -235,6 +235,7 @@ export function VaultSection({ state }: { state: AppState }) {
             </li>
             <li>{t('exporter.vault.rules')}</li>
             <li>{t('exporter.vault.private')}</li>
+            <li>{t('exporter.vault.syncNote')}</li>
           </ul>
 
           <div className="flex flex-col gap-1 border-t border-line pt-2.5">

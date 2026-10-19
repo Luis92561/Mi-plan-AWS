@@ -87,3 +87,84 @@ export async function setTheme(page: Page, theme: 'Oscuro' | 'Claro' | 'Sistema'
 export async function horizontalOverflow(page: Page): Promise<number> {
   return page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
 }
+
+/* ------------------------------------------------------- fechas del producto */
+
+/** Nombre de la base IndexedDB de la app (mismo valor que `src/data/db.ts`). */
+export const DB_NAME = 'miplan-aws';
+
+/**
+ * Fecha de hoy (`YYYY-MM-DD`) en la zona del producto. `America/Bogota` no tiene
+ * horario de verano, así que basta con desplazar 5 h el reloj del proceso.
+ */
+export function bogotaToday(): string {
+  return new Date(Date.now() - 5 * 3_600_000).toISOString().slice(0, 10);
+}
+
+/** Suma días a una fecha `YYYY-MM-DD` sin tocar la zona horaria. */
+export function addDays(date: string, days: number): string {
+  const [year, month, day] = date.split('-').map(Number);
+  const base = new Date(Date.UTC(year, (month ?? 1) - 1, day ?? 1));
+  base.setUTCDate(base.getUTCDate() + days);
+  return base.toISOString().slice(0, 10);
+}
+
+/**
+ * Revierte un ISO a la fecha `YYYY-MM-DD` que representa en la zona del producto.
+ * Necesario porque el dominio guarda instantes UTC (`dateTimeInTz('19:00')` cae al
+ * día siguiente en UTC) y comparar `iso.slice(0, 10)` daría un día de más.
+ */
+export function toBogotaDate(iso: string): string {
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'America/Bogota',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(new Date(iso));
+}
+
+/* ------------------------------------------------------- IndexedDB a mano */
+
+/**
+ * Lee un registro de IndexedDB sin pasar por React. Sirve para comprobar lo que
+ * quedó **persistido** tras una acción de la UI (no lo que pinta la pantalla).
+ */
+export async function readDbRecord<T>(page: Page, store: string, id: string): Promise<T | undefined> {
+  return page.evaluate(
+    async ({ store, id }: { store: string; id: string }): Promise<T | undefined> => {
+      const open = indexedDB.open('miplan-aws');
+      const db = await new Promise<IDBDatabase>((resolve, reject) => {
+        open.onsuccess = () => resolve(open.result);
+        open.onerror = () => reject(open.error);
+      });
+      const tx = db.transaction(store, 'readonly');
+      const request = tx.objectStore(store).get(id);
+      const row = await new Promise<unknown>((resolve, reject) => {
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+      });
+      db.close();
+      return row as T | undefined;
+    },
+    { store, id },
+  );
+}
+
+/** Lee una tabla completa de IndexedDB sin pasar por React. */
+export async function readDbRecords<T>(page: Page, store: string): Promise<T[]> {
+  return page.evaluate(async (name: string): Promise<T[]> => {
+    const open = indexedDB.open('miplan-aws');
+    const db = await new Promise<IDBDatabase>((resolve, reject) => {
+      open.onsuccess = () => resolve(open.result);
+      open.onerror = () => reject(open.error);
+    });
+    const tx = db.transaction(name, 'readonly');
+    const request = tx.objectStore(name).getAll();
+    const rows = await new Promise<unknown>((resolve, reject) => {
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    });
+    db.close();
+    return rows as T[];
+  }, store);
+}

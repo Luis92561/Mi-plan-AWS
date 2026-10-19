@@ -69,7 +69,7 @@ export function StudyInlineForm({
             inputMode="numeric"
             min={1}
             max={MAX_MINUTES}
-            step={5}
+            step={1}
             value={minutesText}
             onChange={(event) => setMinutesText(event.target.value)}
             // El formulario se revela en línea: el foco entra en el primer campo.
